@@ -8,14 +8,14 @@ all: $(DAYS)
 test: $(TESTS)
 
 define test_day_template =
-$(1)_test: export LUA_PATH = ./?.lua;./?/init.lua
+$(1)_test: export LUA_PATH = ./?.lua;./?/init.lua;/usr/local/share/lua/5.1/?.lua;
 $(1)_test: $(1)/*.*
 	luajit $(1)/solution_test.lua
 
 endef
 
 define run_day_template =
-$(1): export LUA_PATH = ./?.lua;./?/init.lua
+$(1): export LUA_PATH = ./?.lua;./?/init.lua;/usr/local/share/lua/5.1/?.lua;
 $(1): $(1)/*.*
 	luajit $(1)/main.lua
 
