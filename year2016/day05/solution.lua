@@ -1,23 +1,5 @@
 local md5 = require('libs.md5')
-local openssl_md5, err = require('resty.openssl.digest').new('md5')
-if err ~= nil then error(err) end
-
----@param buf string
----@param string
-local function _hex_dump(buf)
-    return buf:gsub('.', function(c)
-        return string.format('%02x', string.byte(c))
-    end)
-end
-
----@param input string
----@param string
-local function _md5_openssl(input)
-    assert(openssl_md5:reset())
-    openssl_md5:update(input)
-    local digest = openssl_md5:final()
-    return _hex_dump(digest)
-end
+local openssl_md5 = require('libs.openssl_md5')
 
 ---@param input string
 ---@return string
@@ -32,7 +14,7 @@ end
 local function _find_one_password(prefix, start, pattern)
     while true do
         local input = string.format('%s%d', prefix, start)
-        local hash = _md5_openssl(input)
+        local hash = openssl_md5(input)
         start = start + 1
         if hash:sub(1, #pattern) == pattern then
             return start, hash:sub(#pattern + 1, #pattern + 1)
@@ -47,7 +29,7 @@ end
 local function _find_one_password_v2(prefix, start, pattern)
     while true do
         local input = string.format('%s%d', prefix, start)
-        local hash = _md5_openssl(input)
+        local hash = openssl_md5(input)
         start = start + 1
         if hash:sub(1, #pattern) == pattern then
             return start, hash:sub(#pattern + 1, #pattern + 2)
@@ -101,7 +83,6 @@ end
 
 local M = {}
 M._md5 = _md5
-M._md5_openssl = _md5_openssl
 M._find_one_password = _find_one_password
 M.find_password = find_password
 M.find_password_v2 = find_password_v2

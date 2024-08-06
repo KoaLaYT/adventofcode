@@ -1,24 +1,6 @@
 local test = require('libs.test')
 local s = require('day05.solution')
 
-test('_md5_openssl', function(a)
-    local testcases = {
-        {
-            input = 'The quick brown fox jumps over the lazy dog',
-            expect = '9e107d9d372bb6826bd81d3542a419d6',
-        },
-        {
-            input = 'The quick brown fox jumps over the lazy dog.',
-            expect = 'e4d909c290d0fb1ca068ffaddf22cbd0',
-        },
-    }
-
-    for _, tt in ipairs(testcases) do
-        local got = s._md5_openssl(tt.input)
-        a.equal(got, tt.expect)
-    end
-end)
-
 test('_md5', function(a)
     local testcases = {
         {
