@@ -28,6 +28,11 @@ function Node:new(s)
 end
 
 ---@return string
+function Node:key()
+    return string.format('%d-%d', self.x, self.y)
+end
+
+---@return string
 function Node:__tostring()
     return string.format('(%d-%d)(%d/%d)',
         self.x, self.y, self.used, self.size)
