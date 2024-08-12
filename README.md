@@ -4,5 +4,5 @@
 |:-----------------------------------:|:-----:|:------:|
 |[2015](https://adventofcode.com/2015)|25/25  |Go      |
 |[2016](https://adventofcode.com/2016)|25/25  |Lua     |
-|[2017](https://adventofcode.com/2017)|04/25  |Lua/C   |
+|[2017](https://adventofcode.com/2017)|05/25  |Lua/C   |
 
