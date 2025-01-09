@@ -30,6 +30,27 @@ void solve(const char* label, const char* input,
     printf("Took: %.2fms\n", end - start);
 }
 
+void solve_s(const char* label, const char* input,
+             const char* (*solution)(const char* input))
+{
+    if (solution == 0) return;
+
+    struct timespec tp;
+    clock_getres(CLOCK_PROCESS_CPUTIME_ID, &tp);
+    long res = tp.tv_nsec;
+
+    printf(">>>> %s <<<<\n", label);
+
+    double start = get_cputime_ms(res);
+    const char* result = solution(input);
+    double end = get_cputime_ms(res);
+
+    printf("Answer: %s\n", result);
+    printf("Took: %.2fms\n", end - start);
+
+    free((void*)result);
+}
+
 int kt_atoi(const char* s)
 {
     int i = 0;

@@ -5,16 +5,31 @@
 void solve(const char* label, const char* input,
            int (*solution)(const char* input));
 
+void solve_s(const char* label, const char* input,
+             const char* (*solution)(const char* input));
+
 #define PART_ONE(solution)                  \
     static void part_one(const char* input) \
     {                                       \
         solve("Part One", input, solution); \
     }
 
+#define PART_ONE_S(solution)                  \
+    static void part_one(const char* input)   \
+    {                                         \
+        solve_s("Part One", input, solution); \
+    }
+
 #define PART_TWO(solution)                  \
     static void part_two(const char* input) \
     {                                       \
         solve("Part Two", input, solution); \
+    }
+
+#define PART_TWO_S(solution)                  \
+    static void part_two(const char* input)   \
+    {                                         \
+        solve_s("Part Two", input, solution); \
     }
 
 #define MAIN                        \
