@@ -43,5 +43,6 @@ void solve_s(const char* label, const char* input,
     }
 
 int kt_atoi(const char* s);
+int kt_atoi_s(const char* s, int len);
 
 void* kt_malloc(size_t size);

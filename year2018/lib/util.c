@@ -73,6 +73,28 @@ int kt_atoi(const char* s)
     return result * sign;
 }
 
+int kt_atoi_s(const char* s, int len)
+{
+    int i = 0;
+    int sign = 1;
+
+    if (s[i] == '+') {
+        i += 1;
+    } else if (s[i] == '-') {
+        i += 1;
+        sign = -1;
+    }
+
+    int result = 0;
+    while (i < len) {
+        // TODO overflow check
+        result = result * 10 + (s[i] - '0');
+        i += 1;
+    }
+
+    return result * sign;
+}
+
 void* kt_malloc(size_t size)
 {
     void* m = malloc(size);

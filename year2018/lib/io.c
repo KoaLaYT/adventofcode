@@ -49,6 +49,17 @@ void kt_scanner_deinit(void* self)
     free(self);
 }
 
+void kt_scanner_reset(void* self)
+{
+    kt_scanner* scanner = self;
+    if (lseek(scanner->fd, 0, SEEK_SET) < 0) {
+        perror("lseek");
+        exit(1);
+    }
+    scanner->p = 0;
+    scanner->len = 0;
+}
+
 const char* kt_scanner_next(void* self, char delimiter)
 {
     char* buf = (char*)self + sizeof(kt_scanner);

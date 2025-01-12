@@ -14,6 +14,7 @@ test: $(TESTS)
 define run_day_template =
 $(1): lib
 	@gcc $(COMPILE_FLAG) -o bin/$(1) $(LIB_OBJ) $(1)/main.c
+	@echo "$(1)"
 	@./bin/$(1) $(1)/input.txt
 
 endef
