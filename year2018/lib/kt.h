@@ -1,6 +1,7 @@
 #pragma once
 
-#include "stddef.h"
+#include <assert.h>
+#include <stddef.h>
 
 // io
 void* kt_scanner_init(const char* filename);

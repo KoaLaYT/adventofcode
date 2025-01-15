@@ -24,7 +24,8 @@ void* kt_scanner_init(const char* filename)
         exit(1);
     }
 
-    void* mem = malloc(sizeof(kt_scanner) + CAP);
+    void* mem = kt_malloc(sizeof(kt_scanner) + CAP);
+    memset(mem, 0, sizeof(kt_scanner) + CAP);
     if (mem == NULL) {
         perror("malloc");
         exit(1);
@@ -32,8 +33,6 @@ void* kt_scanner_init(const char* filename)
 
     int* header = (int*)mem;
     header[0] = fd;
-    header[1] = 0;
-    header[2] = 0;
 
     return mem;
 }
