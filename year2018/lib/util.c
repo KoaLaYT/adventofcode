@@ -1,8 +1,8 @@
-#include "util.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
+#include "kt.h"
 
 static double get_cputime_ms(long res)
 {

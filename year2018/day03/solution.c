@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../lib/io.h"
+#include "../lib/kt.h"
 #include "../lib/re.h"
-#include "../lib/util.h"
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 

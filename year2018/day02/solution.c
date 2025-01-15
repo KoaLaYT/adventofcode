@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../lib/io.h"
-#include "../lib/util.h"
+#include "../lib/kt.h"
 
 static int count_letters(const char* s, int num)
 {

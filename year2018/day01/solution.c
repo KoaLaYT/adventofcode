@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../lib/io.h"
-#include "../lib/util.h"
+#include "../lib/kt.h"
 
 static int parse_row(const char* s) { return kt_atoi(s); }
 
