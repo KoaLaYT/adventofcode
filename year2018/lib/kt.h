@@ -6,6 +6,20 @@
 #include <stdlib.h>
 #include <string.h>
 
+// arena
+void* kt_linear_arena_init(size_t size);
+void* kt_linear_arena_malloc(void* self, size_t size);
+void* kt_linear_arena_malloc_zero(void* self, size_t size);
+void kt_linear_arena_deinit(void* self);
+#define kt_linear_arena_create(arena, T) \
+    (T*)kt_linear_arena_malloc(arena, sizeof(T))
+#define kt_linear_arena_create_zero(arena, T) \
+    (T*)kt_linear_arena_malloc_zero(arena, sizeof(T))
+#define kt_linear_arena_array(arena, T, size) \
+    (T*)kt_linear_arena_malloc(arena, sizeof(T) * size);
+#define kt_linear_arena_array_zero(arena, T, size) \
+    (T*)kt_linear_arena_malloc_zero(arena, sizeof(T) * size);
+
 // io
 void* kt_scanner_init(const char* filename);
 void kt_scanner_deinit(void* self);
