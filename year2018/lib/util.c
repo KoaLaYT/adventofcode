@@ -64,7 +64,7 @@ int kt_atoi(const char* s)
     }
 
     int result = 0;
-    while (s[i] != 0) {
+    while (s[i] >= '0' && s[i] <= '9') {
         // TODO overflow check
         result = result * 10 + (s[i] - '0');
         i += 1;
