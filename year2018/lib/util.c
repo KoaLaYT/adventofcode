@@ -11,42 +11,59 @@ static double get_cputime_ms(long res)
     return tp.tv_sec * 1000 + tp.tv_nsec * res / 1e6;
 }
 
-void solve(const char* label, const char* input,
-           int (*solution)(const char* input))
+#define SOLVE(type, suffix)                                         \
+    static type solve_##suffix(double* took, const char* input,     \
+                               type (*solution)(const char* input)) \
+    {                                                               \
+        if (solution == 0) return (type)0;                          \
+                                                                    \
+        struct timespec tp;                                         \
+        clock_getres(CLOCK_PROCESS_CPUTIME_ID, &tp);                \
+        long res = tp.tv_nsec;                                      \
+                                                                    \
+        double start = get_cputime_ms(res);                         \
+        type result = solution(input);                              \
+        double end = get_cputime_ms(res);                           \
+                                                                    \
+        *took = end - start;                                        \
+        return result;                                              \
+    }
+
+SOLVE(int, int)
+SOLVE(long, long)
+SOLVE(const char*, str)
+
+#undef SOLVE
+
+void solve_l(const char* label, const char* input,
+             long (*solution)(const char* input))
 {
-    if (solution == 0) return;
-
-    struct timespec tp;
-    clock_getres(CLOCK_PROCESS_CPUTIME_ID, &tp);
-    long res = tp.tv_nsec;
-
     printf(">>>> %s <<<<\n", label);
+    double took;
+    long result = solve_long(&took, input, solution);
+    printf("Answer: %ld\n", result);
+    printf("Took: %.2fms\n", took);
+}
 
-    double start = get_cputime_ms(res);
-    int result = solution(input);
-    double end = get_cputime_ms(res);
-
+void solve_i(const char* label, const char* input,
+             int (*solution)(const char* input))
+{
+    printf(">>>> %s <<<<\n", label);
+    double took;
+    int result = solve_int(&took, input, solution);
     printf("Answer: %d\n", result);
-    printf("Took: %.2fms\n", end - start);
+    printf("Took: %.2fms\n", took);
 }
 
 void solve_s(const char* label, const char* input,
              const char* (*solution)(const char* input))
 {
-    if (solution == 0) return;
-
-    struct timespec tp;
-    clock_getres(CLOCK_PROCESS_CPUTIME_ID, &tp);
-    long res = tp.tv_nsec;
-
     printf(">>>> %s <<<<\n", label);
-
-    double start = get_cputime_ms(res);
-    const char* result = solution(input);
-    double end = get_cputime_ms(res);
+    double took;
+    const char* result = solve_str(&took, input, solution);
 
     printf("Answer: %s\n", result);
-    printf("Took: %.2fms\n", end - start);
+    printf("Took: %.2fms\n", took);
 
     free((void*)result);
 }

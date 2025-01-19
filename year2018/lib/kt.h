@@ -28,16 +28,21 @@ void kt_scanner_reset(void* self);
 char* kt_read_all(const char* filename);
 
 // util
-void solve(const char* label, const char* input,
-           int (*solution)(const char* input));
+#define UNUSED(x) (void)(x)
+
+void solve_i(const char* label, const char* input,
+             int (*solution)(const char* input));
 
 void solve_s(const char* label, const char* input,
              const char* (*solution)(const char* input));
 
-#define PART_ONE(solution)                  \
-    static void part_one(const char* input) \
-    {                                       \
-        solve("Part One", input, solution); \
+void solve_l(const char* label, const char* input,
+             long (*solution)(const char* input));
+
+#define PART_ONE(solution)                    \
+    static void part_one(const char* input)   \
+    {                                         \
+        solve_i("Part One", input, solution); \
     }
 
 #define PART_ONE_S(solution)                  \
@@ -46,16 +51,28 @@ void solve_s(const char* label, const char* input,
         solve_s("Part One", input, solution); \
     }
 
-#define PART_TWO(solution)                  \
-    static void part_two(const char* input) \
-    {                                       \
-        solve("Part Two", input, solution); \
+#define PART_ONE_L(solution)                  \
+    static void part_one(const char* input)   \
+    {                                         \
+        solve_l("Part One", input, solution); \
+    }
+
+#define PART_TWO(solution)                    \
+    static void part_two(const char* input)   \
+    {                                         \
+        solve_i("Part Two", input, solution); \
     }
 
 #define PART_TWO_S(solution)                  \
     static void part_two(const char* input)   \
     {                                         \
         solve_s("Part Two", input, solution); \
+    }
+
+#define PART_TWO_L(solution)                  \
+    static void part_two(const char* input)   \
+    {                                         \
+        solve_l("Part Two", input, solution); \
     }
 
 #define MAIN                        \
