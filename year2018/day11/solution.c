@@ -43,7 +43,7 @@ static int* calculate_powers(int serial_num)
 static result_t largest_square_impl(int* powers, int size)
 {
     int largest = -2147483647;
-    int lx, ly;
+    int lx = 0, ly = 0;
 
     for (int y = 0; y < SIZE - size + 1; y++) {
         for (int x = 0; x < SIZE - size + 1; x++) {
@@ -83,7 +83,7 @@ static const char* largest_33_impl(int serial_num)
 static const char* largest_impl(int serial_num)
 {
     int* powers = calculate_powers(serial_num);
-    result_t largest;
+    result_t largest = {0};
     largest.v = -2147483647;
     for (int size = 1; size <= SIZE; size++) {
         result_t r = largest_square_impl(powers, size);

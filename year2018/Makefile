@@ -1,4 +1,4 @@
-COMPILE_FLAG := -g -Wall -Wextra
+COMPILE_FLAG := -g -Wall -Wextra -O3
 
 LIB_SRC := $(shell find ./lib -name "*.c")
 LIB_OBJ := $(LIB_SRC:%=obj/%.o)

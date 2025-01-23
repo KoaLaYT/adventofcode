@@ -2,6 +2,7 @@
 
 #define NOTE_SIZE 32
 #define PLANT_EMPTY_SLOT 500
+#define BUF_SIZE 256
 
 typedef struct {
     char* plants;
@@ -51,7 +52,7 @@ static void plant_print(const plant_t* self, char* output)
         char c = self->plants[i] ? '#' : '.';
         sprintf(output + i - self->head, "%c", c);
     }
-    output[i] = '\0';
+    output[i - self->head] = 0;
 }
 
 static int plant_sum(const plant_t* self)
@@ -135,8 +136,8 @@ static int sum_plants_impl(plant_t* plant, char* notes, long generations)
 
 static long sum_plants2_impl(plant_t* plant, char* notes, long generations)
 {
-    char prev[512] = {0};
-    char curr[512] = {0};
+    char prev[BUF_SIZE] = {0};
+    char curr[BUF_SIZE] = {0};
 
     long i = 0;
     for (; i < generations; i++) {
@@ -150,9 +151,9 @@ static long sum_plants2_impl(plant_t* plant, char* notes, long generations)
 
     long left = generations - 1 - i;
     long result = 0;
-    for (int j = plant->head; j <= (int)plant->tail; j++) {
+    for (size_t j = plant->head; j <= plant->tail; j++) {
         if (plant->plants[j]) {
-            result += j + left - PLANT_EMPTY_SLOT;
+            result += j + left - (long)PLANT_EMPTY_SLOT;
         }
     }
 

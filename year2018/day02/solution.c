@@ -102,7 +102,7 @@ const char* correct_id(const char* input)
         lines[len++] = buf;
     }
 
-    int a, b;
+    int a = 0, b = 0;
     find_correct_id(lines, len, &a, &b);
     const char* result = copy_id(lines[a], lines[b]);
 
