@@ -6,10 +6,42 @@
 #include <stdlib.h>
 #include <string.h>
 
+// types
+typedef unsigned char u8;
+typedef unsigned short u16;
+typedef unsigned int u32;
+typedef unsigned long long u64;
+
+typedef signed char i8;
+typedef signed short i16;
+typedef signed int i32;
+typedef signed long long i64;
+
+typedef float f32;
+typedef double f64;
+
+typedef char b8;
+#define TRUE 1
+#define FALSE 0
+
+// assert
+#define ASSERT_MSG(condition, format, ...)                       \
+    do {                                                         \
+        if (!(condition)) {                                      \
+            fprintf(stderr,                                      \
+                    "Assertion failed: %s, file %s, line "       \
+                    "%d:\n>>>>>>>>>>>>>>>>: ",                   \
+                    #condition, __FILE__, __LINE__);             \
+            fprintf(stderr, format, __VA_ARGS__);                \
+            fprintf(stderr, "\n"); /* Add newline for clarity */ \
+            abort();                                             \
+        }                                                        \
+    } while (0)
+
 // arena
-void* kt_linear_arena_init(size_t size);
-void* kt_linear_arena_malloc(void* self, size_t size);
-void* kt_linear_arena_malloc_zero(void* self, size_t size);
+void* kt_linear_arena_init(int size);
+void* kt_linear_arena_malloc(void* self, int size);
+void* kt_linear_arena_malloc_zero(void* self, int size);
 void kt_linear_arena_deinit(void* self);
 #define kt_linear_arena_create(arena, T) \
     (T*)kt_linear_arena_malloc(arena, sizeof(T))
@@ -88,4 +120,4 @@ void solve_l(const char* label, const char* input,
 int kt_atoi(const char* s);
 int kt_atoi_s(const char* s, int len);
 
-void* kt_malloc(size_t size);
+void* kt_malloc(int size);

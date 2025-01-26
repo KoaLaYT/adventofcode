@@ -16,7 +16,7 @@ TEST(test_ten_recipes_impl)
         {2018, "5941429882"},
     };
 
-    for (size_t i = 0; i < sizeof(test_cases) / sizeof(test_case); i++) {
+    for (int i = 0; i < sizeof(test_cases) / sizeof(test_case); i++) {
         void* arena = kt_linear_arena_init(1024 * 1024);
         test_case tt = test_cases[i];
         const char* got = ten_recipes_impl(arena, tt.recipes);
@@ -41,7 +41,7 @@ TEST(test_recipes_util_impl)
         {"59414", 2018},
     };
 
-    for (size_t i = 0; i < sizeof(test_cases) / sizeof(test_case); i++) {
+    for (int i = 0; i < sizeof(test_cases) / sizeof(test_case); i++) {
         void* arena = kt_linear_arena_init(CAP);
         test_case tt = test_cases[i];
         int got = recipes_until_impl(arena, tt.target);

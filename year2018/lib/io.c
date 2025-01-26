@@ -77,7 +77,7 @@ const char* kt_scanner_next(void* self, char delimiter)
         }
     }
 
-    size_t left = scanner->len - scanner->p;
+    int left = scanner->len - scanner->p;
     if (left == CAP) {
         fprintf(stderr, "buf overflow");
         exit(1);

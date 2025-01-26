@@ -9,7 +9,7 @@ static void notes_init(char* notes)
         ".##.. => #", ".#### => #", "#.#.# => #", "#.### => #", "##.#. => #",
         "##.## => #", "###.. => #", "###.# => #", "####. => #",
     };
-    for (size_t i = 0; i < sizeof(input) / sizeof(input[0]); i++) {
+    for (int i = 0; i < sizeof(input) / sizeof(input[0]); i++) {
         note_parse(input[i], notes);
     }
 }
@@ -18,7 +18,7 @@ TEST(test_note_parse)
 {
     typedef struct {
         const char* input;
-        size_t expect_i;
+        int expect_i;
         char expect_v;
     } test_case;
 
@@ -28,7 +28,7 @@ TEST(test_note_parse)
         {"####. => #", 30, 1},
     };
 
-    for (size_t i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); i++) {
+    for (int i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); i++) {
         test_case tt = test_cases[i];
         char notes[32] = {0};
         memset(notes, 0, 32);

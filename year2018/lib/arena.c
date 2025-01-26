@@ -5,7 +5,7 @@ typedef struct {
     int pos;
 } linear_arean_t;
 
-void* kt_linear_arena_init(size_t size)
+void* kt_linear_arena_init(int size)
 {
     void* m = kt_malloc(size + sizeof(linear_arean_t));
 
@@ -16,7 +16,7 @@ void* kt_linear_arena_init(size_t size)
     return header + 1;
 }
 
-void* kt_linear_arena_malloc(void* self, size_t size)
+void* kt_linear_arena_malloc(void* self, int size)
 {
     linear_arean_t* header = (linear_arean_t*)self - 1;
     int pos = header->pos + size;
@@ -31,7 +31,7 @@ void* kt_linear_arena_malloc(void* self, size_t size)
     return m;
 }
 
-void* kt_linear_arena_malloc_zero(void* self, size_t size)
+void* kt_linear_arena_malloc_zero(void* self, int size)
 {
     void* m = kt_linear_arena_malloc(self, size);
     memset(m, 0, size);

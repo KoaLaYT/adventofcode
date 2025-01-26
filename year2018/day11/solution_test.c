@@ -15,7 +15,7 @@ TEST(test_power_level)
         {35, 45, 18, 4},   {33, 46, 18, 3},   {32, 44, 18, -2},
     };
 
-    for (size_t i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); i++) {
+    for (int i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); i++) {
         test_case tt = test_cases[i];
         int got = power_level(tt.x, tt.y, tt.serial_num);
         EXPECT(got == tt.expect, "expect %d, got %d", tt.expect, got);
@@ -34,7 +34,7 @@ TEST(test_largest_33_impl)
         {42, "21,61"},
     };
 
-    for (size_t i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); i++) {
+    for (int i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); i++) {
         test_case tt = test_cases[i];
         const char* got = largest_33_impl(tt.serial_num);
         EXPECT(strcmp(got, tt.expect) == 0,  //
@@ -55,7 +55,7 @@ TEST(test_largest_impl)
         {42, "232,251,12"},
     };
 
-    for (size_t i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); i++) {
+    for (int i = 0; i < sizeof(test_cases) / sizeof(test_cases[0]); i++) {
         test_case tt = test_cases[i];
         const char* got = largest_impl(tt.serial_num);
         EXPECT(strcmp(got, tt.expect) == 0,  //

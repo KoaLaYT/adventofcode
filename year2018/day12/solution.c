@@ -6,9 +6,9 @@
 
 typedef struct {
     char* plants;
-    size_t cap;
-    size_t head;
-    size_t tail;
+    int cap;
+    int head;
+    int tail;
 } plant_t;
 
 typedef struct {
@@ -20,7 +20,7 @@ static plant_t plant_from(void* arena, const char* s)
 {
     plant_t p;
     int len = strlen(s);
-    size_t cap = 2 * PLANT_EMPTY_SLOT + len;
+    int cap = 2 * PLANT_EMPTY_SLOT + len;
     p.plants = kt_linear_arena_array_zero(arena, char, cap);
     p.cap = cap;
 
@@ -151,7 +151,7 @@ static long sum_plants2_impl(plant_t* plant, char* notes, long generations)
 
     long left = generations - 1 - i;
     long result = 0;
-    for (size_t j = plant->head; j <= plant->tail; j++) {
+    for (int j = plant->head; j <= plant->tail; j++) {
         if (plant->plants[j]) {
             result += j + left - (long)PLANT_EMPTY_SLOT;
         }

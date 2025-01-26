@@ -13,7 +13,7 @@ TEST(test_parse_line)
     {
         parse_line("/->-\\", &track, 0, carts, &cart_len);
         const char* expect = "/---\\";
-        for (size_t i = 0; i < strlen(expect); i++) {
+        for (int i = 0; i < strlen(expect); i++) {
             EXPECT(track.arr[i] == expect[i],  //
                    "expect %c, got %c", expect[i], track.arr[0]);
         }
@@ -27,7 +27,7 @@ TEST(test_parse_line)
     {
         parse_line("\\-+-/  \\->--/", &track, 4, carts, &cart_len);
         const char* expect = "\\-+-/  \\----/";
-        for (size_t i = 0; i < strlen(expect); i++) {
+        for (int i = 0; i < strlen(expect); i++) {
             EXPECT(track.arr[13 * 4 + i] == expect[i],  //
                    "expect %c, got %c", expect[i], track.arr[0]);
         }

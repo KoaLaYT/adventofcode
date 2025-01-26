@@ -15,7 +15,7 @@ TEST(test_highest_score_impl)
         {17, 1104, 2764}, {21, 6111, 54718}, {30, 5807, 37305},
     };
 
-    for (size_t i = 0; i < sizeof(test_cases) / sizeof(test_case); i++) {
+    for (int i = 0; i < sizeof(test_cases) / sizeof(test_case); i++) {
         test_case tt = test_cases[i];
         void* arena = kt_linear_arena_init(1024 * 1024);
         int got = highest_score_impl(arena, tt.player_len, tt.last);

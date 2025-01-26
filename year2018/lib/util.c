@@ -112,7 +112,7 @@ int kt_atoi_s(const char* s, int len)
     return result * sign;
 }
 
-void* kt_malloc(size_t size)
+void* kt_malloc(int size)
 {
     void* m = malloc(size);
     if (!m) {
