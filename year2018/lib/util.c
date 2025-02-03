@@ -1,3 +1,4 @@
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -80,10 +81,13 @@ int kt_atoi(const char* s)
         sign = -1;
     }
 
-    int result = 0;
+    i64 result = 0;
     while (s[i] >= '0' && s[i] <= '9') {
-        // TODO overflow check
-        result = result * 10 + (s[i] - '0');
+        result = result * 10L + (i64)(s[i] - '0');
+        if (result > INT_MAX) {
+            fprintf(stderr, "parse %s to int overflow", s);
+            exit(1);
+        }
         i += 1;
     }
 
@@ -102,10 +106,13 @@ int kt_atoi_s(const char* s, int len)
         sign = -1;
     }
 
-    int result = 0;
+    i64 result = 0;
     while (i < len) {
-        // TODO overflow check
-        result = result * 10 + (s[i] - '0');
+        result = result * 10L + (i64)(s[i] - '0');
+        if (result > INT_MAX) {
+            fprintf(stderr, "parse %.*s to int overflow", len, s);
+            exit(1);
+        }
         i += 1;
     }
 
