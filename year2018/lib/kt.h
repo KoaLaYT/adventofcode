@@ -48,9 +48,9 @@ void kt_linear_arena_deinit(void* self);
 #define kt_linear_arena_create_zero(arena, T) \
     (T*)kt_linear_arena_malloc_zero(arena, sizeof(T))
 #define kt_linear_arena_array(arena, T, size) \
-    (T*)kt_linear_arena_malloc(arena, sizeof(T) * size);
+    (T*)kt_linear_arena_malloc(arena, sizeof(T) * (size));
 #define kt_linear_arena_array_zero(arena, T, size) \
-    (T*)kt_linear_arena_malloc_zero(arena, sizeof(T) * size);
+    (T*)kt_linear_arena_malloc_zero(arena, sizeof(T) * (size));
 
 // io
 void* kt_scanner_init(const char* filename);
