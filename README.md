@@ -6,5 +6,5 @@
 |[2016](https://adventofcode.com/2016)|25/25  |Lua     |
 |[2017](https://adventofcode.com/2017)|25/25  |Lua/C   |
 |[2018](https://adventofcode.com/2018)|25/25  |C       |
-|[2019](https://adventofcode.com/2019)|05/25  |Zig     |
+|[2019](https://adventofcode.com/2019)|06/25  |Zig     |
 
