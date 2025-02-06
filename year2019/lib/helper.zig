@@ -14,3 +14,17 @@ pub fn solve(comptime T: anytype, comptime tag: []const u8, f: *const fn (inputF
     try stdout.print("Answer: {}\n", .{result});
     try stdout.print("Took: {d:.3}ms\n", .{elapsed / std.time.ns_per_ms});
 }
+
+pub fn solveS(comptime tag: []const u8, f: *const fn (inputFile: []const u8, output: []u8) void) !void {
+    var args = std.process.args();
+    _ = args.next();
+    const inputFile = args.next().?;
+
+    try stdout.print(">>>> {s} <<<<\n", .{tag});
+    var timer = try Timer.start();
+    var ouput: [4096]u8 = undefined;
+    f(inputFile, ouput[0..]);
+    const elapsed: f64 = @floatFromInt(timer.read());
+    try stdout.print("Answer: {s}\n", .{ouput});
+    try stdout.print("Took: {d:.3}ms\n", .{elapsed / std.time.ns_per_ms});
+}
