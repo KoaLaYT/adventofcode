@@ -90,7 +90,7 @@ const ImageData = struct {
 };
 
 pub fn countFewestLayer(input_file: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}).init;
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const allocator = gpa.allocator();
 
     var d = ImageData.init(allocator, input_file) catch unreachable;
@@ -100,7 +100,7 @@ pub fn countFewestLayer(input_file: []const u8) u32 {
 }
 
 pub fn decode(input_file: []const u8, ouput: []u8) void {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}).init;
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const allocator = gpa.allocator();
 
     var d = ImageData.init(allocator, input_file) catch unreachable;
