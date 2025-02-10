@@ -14,9 +14,9 @@ pub fn build(b: *std.Build) !void {
         const isDay = std.mem.startsWith(u8, entry.name, "day");
         if (!isDay) continue;
 
-        const desc = try std.fmt.allocPrint(b.allocator, "Run {s}", .{entry.name});
-        const source = try std.fmt.allocPrint(b.allocator, "{s}/main.zig", .{entry.name});
-        const arg = try std.fmt.allocPrint(b.allocator, "{s}/input.txt", .{entry.name});
+        const desc = b.fmt("Run {s}", .{entry.name});
+        const source = b.fmt("{s}/main.zig", .{entry.name});
+        const arg = b.fmt("{s}/input.txt", .{entry.name});
 
         const day_step = b.step(entry.name, desc);
         const day = b.addExecutable(.{
