@@ -17,7 +17,7 @@ endef
 define run_day_template = 
 $(1): $(1)/*.*
 	@echo $(1)
-	@zig build $(patsubst ./%,%,$(1))
+	@zig build $(patsubst ./%,%,$(1)) -Doptimize=ReleaseSafe
 
 endef
 
