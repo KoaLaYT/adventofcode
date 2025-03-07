@@ -98,7 +98,7 @@ fn doMinimumOrbitalTransfers(allocator: std.mem.Allocator, orbits_map: OrbitsMap
 }
 
 pub fn totalOribits(input_file: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();
@@ -110,7 +110,7 @@ pub fn totalOribits(input_file: []const u8) u32 {
 }
 
 pub fn minimumOrbitalTransfers(input_file: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();

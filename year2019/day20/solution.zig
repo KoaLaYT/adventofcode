@@ -654,7 +654,7 @@ fn Queue(comptime T: type) type {
 }
 
 fn doFewestSteps(input_file: []const u8) !u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
@@ -665,7 +665,7 @@ fn doFewestSteps(input_file: []const u8) !u32 {
 }
 
 fn doRecursionFewestSteps(input_file: []const u8) !u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 

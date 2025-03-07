@@ -42,7 +42,7 @@ fn runProgram(list: std.ArrayList(u32)) void {
 }
 
 pub fn restoreGravityAssistProgram(inputFile: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     const allocator = gpa.allocator();
     var list = parseInput(allocator, inputFile) catch unreachable;
     defer list.deinit();
@@ -62,7 +62,7 @@ fn resetProgram(dst: std.ArrayList(u32), src: std.ArrayList(u32)) void {
 }
 
 pub fn nounAndVerbToProduceOutput(inputFile: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     const allocator = gpa.allocator();
     var templ = parseInput(allocator, inputFile) catch |err| {
         @panic(@errorName(err));

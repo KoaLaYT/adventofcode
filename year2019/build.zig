@@ -4,8 +4,9 @@ pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const root_source_file = b.path("lib/helper.zig");
-    const lib_mod = b.addModule("helper", .{ .root_source_file = root_source_file });
+    const helper_mod = b.createModule(.{
+        .root_source_file = b.path("lib/helper.zig"),
+    });
 
     var dir = try std.fs.cwd().openDir(".", .{ .iterate = true });
     defer dir.close();
@@ -18,13 +19,16 @@ pub fn build(b: *std.Build) !void {
         const source = b.fmt("{s}/main.zig", .{entry.name});
         const arg = b.fmt("{s}/input.txt", .{entry.name});
 
-        const day = b.addExecutable(.{
-            .name = entry.name,
+        const module = b.createModule(.{
+            .root_source_file = b.path(source),
             .target = target,
             .optimize = optimize,
-            .root_source_file = b.path(source),
         });
-        day.root_module.addImport("helper", lib_mod);
+        module.addImport("helper", helper_mod);
+        const day = b.addExecutable(.{
+            .name = entry.name,
+            .root_module = module,
+        });
         b.installArtifact(day);
 
         const example_run = b.addRunArtifact(day);

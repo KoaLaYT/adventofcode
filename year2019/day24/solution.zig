@@ -127,7 +127,7 @@ fn doDetechLoop(allocator: Allocator, eris: *Eris) !void {
 }
 
 pub fn detechLoop(input_file: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
@@ -397,7 +397,7 @@ const RecursiveEris = struct {
 };
 
 fn doCountBugs(input_file: []const u8) !usize {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 

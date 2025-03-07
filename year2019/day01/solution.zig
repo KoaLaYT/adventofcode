@@ -45,7 +45,7 @@ fn fuelTotalRequired(mass: u32) u32 {
 }
 
 pub fn sumOfFuelRequirements(inputFile: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     const allocator = gpa.allocator();
     var list = parseInput(allocator, inputFile) catch |err| {
         @panic(@errorName(err));
@@ -60,7 +60,7 @@ pub fn sumOfFuelRequirements(inputFile: []const u8) u32 {
 }
 
 pub fn sumOfFuelTotalRequirements(inputFile: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     const allocator = gpa.allocator();
     var list = parseInput(allocator, inputFile) catch |err| {
         @panic(@errorName(err));

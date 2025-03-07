@@ -58,7 +58,7 @@ const IntcodeComputer = struct {
 
     fn runOpSaveInput(self: *Self) bool {
         const p: usize = @intCast(self.program.items[self.pc + 1]);
-        const maybeInput = self.inputs.popOrNull();
+        const maybeInput = self.inputs.pop();
         if (maybeInput) |input| {
             self.program.items[p] = input;
             self.pc += 2;
@@ -312,7 +312,7 @@ fn doFeedbackLoop(allocator: std.mem.Allocator, program: std.ArrayList(i32)) i32
 }
 
 pub fn largestOutput(input_file: []const u8) i32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();
@@ -322,7 +322,7 @@ pub fn largestOutput(input_file: []const u8) i32 {
 }
 
 pub fn feedbackLoop(input_file: []const u8) i32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();

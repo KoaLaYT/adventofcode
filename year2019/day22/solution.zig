@@ -343,7 +343,7 @@ fn inv(a: i128, m: i128) i128 {
 }
 
 fn doShuffle(input_file: []const u8) !usize {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
@@ -365,7 +365,7 @@ fn doShuffle(input_file: []const u8) !usize {
 }
 
 fn doLargeShuffle(input_file: []const u8) !isize {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 

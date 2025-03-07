@@ -75,7 +75,7 @@ fn doFirstEightOfFFT(input_file: []const u8, output: []u8) !void {
     std.debug.assert(n == try f.getEndPos());
     std.debug.assert(buf[n - 1] == '\n');
 
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();
@@ -122,7 +122,7 @@ fn doRealSignal(input_file: []const u8, output: []u8) !void {
     std.debug.assert(n == try f.getEndPos());
     std.debug.assert(buf[n - 1] == '\n');
 
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();

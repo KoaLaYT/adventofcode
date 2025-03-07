@@ -160,7 +160,7 @@ fn lcm(a: u64, b: u64) u64 {
 }
 
 fn doFindRepeat(pxs: [4]Point, pys: [4]Point, pzs: [4]Point) u64 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();

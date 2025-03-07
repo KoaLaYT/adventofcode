@@ -129,7 +129,7 @@ const IntcodeComputer = struct {
     fn runOpSaveInput(self: *Self, mode: [3]Mode) bool {
         const v = self.program.items[self.pc + 1];
         const ptr = self.getAddressAtBy(mode[0], v);
-        ptr.* = self.inputs.popOrNull() orelse return false;
+        ptr.* = self.inputs.pop() orelse return false;
         self.pc += 2;
         return true;
     }
@@ -300,7 +300,7 @@ fn parseInput(allocator: std.mem.Allocator, input_file: []const u8) !Program {
 }
 
 fn doHullDamageWithWalk(input_file: []const u8) !i64 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();
@@ -322,7 +322,7 @@ fn doHullDamageWithWalk(input_file: []const u8) !i64 {
 }
 
 fn doHullDamageWithRun(input_file: []const u8) !i64 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();

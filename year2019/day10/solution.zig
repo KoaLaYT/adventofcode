@@ -258,7 +258,7 @@ fn gcd(comptime T: anytype, a: T, b: T) T {
 }
 
 pub fn maxDetectedAsteroids(input_file: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const m = Map.init(gpa.allocator(), input_file) catch unreachable;
@@ -272,7 +272,7 @@ pub fn maxDetectedAsteroids(input_file: []const u8) u32 {
 }
 
 pub fn vaporizeTill(input_file: []const u8) i32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     var m = Map.init(gpa.allocator(), input_file) catch unreachable;

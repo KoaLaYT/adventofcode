@@ -206,7 +206,7 @@ fn parseInput(allocator: std.mem.Allocator, input_file: []const u8) ![2]std.Arra
 }
 
 pub fn closestIntersectAt(input_file: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 
@@ -220,7 +220,7 @@ pub fn closestIntersectAt(input_file: []const u8) u32 {
 }
 
 pub fn fewestSteps(input_file: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
 

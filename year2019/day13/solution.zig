@@ -235,7 +235,7 @@ const IntcodeComputer = struct {
     fn runOpSaveInput(self: *Self, mode: [3]Mode) bool {
         const v = self.program.items[self.pc + 1];
         const ptr = self.getAddressAtBy(mode[0], v);
-        ptr.* = self.inputs.popOrNull() orelse return false;
+        ptr.* = self.inputs.pop() orelse return false;
         self.pc += 2;
         return true;
     }
@@ -404,7 +404,7 @@ fn parseInput(allocator: std.mem.Allocator, input_file: []const u8) !std.ArrayLi
 }
 
 pub fn countBlockTiles(input_file: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();
@@ -428,7 +428,7 @@ pub fn countBlockTiles(input_file: []const u8) u32 {
 // solve it by cheating:
 // change the input file, so that the last row is all walls.
 pub fn play(input_file: []const u8) u32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();

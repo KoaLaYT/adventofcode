@@ -191,7 +191,7 @@ fn parseInput(allocator: std.mem.Allocator, input_file: []const u8) !std.ArrayLi
 }
 
 pub fn diagnosticCode(input_file: []const u8) i32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();
@@ -215,7 +215,7 @@ pub fn diagnosticCode(input_file: []const u8) i32 {
 }
 
 pub fn diagnosticCode2(input_file: []const u8) i32 {
-    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var gpa = std.heap.DebugAllocator(.{}).init;
     defer _ = gpa.deinit();
 
     const allocator = gpa.allocator();
